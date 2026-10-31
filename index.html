@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="sk" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Zdroje – Manažment dažďovej vody v mestách</title>
+<meta name="description" content="Zoznam použitých zdrojov k prezentácii Manažment dažďovej vody v mestách: Sponge Cities a zelené strechy. Environmentalistika, TUKE.">
+<meta name="theme-color" content="#1f2223">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💧%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ---------- Material 3 tokens (tonal palette from the slides) ---------- */
+:root, [data-theme="dark"] {
+  color-scheme: dark;
+  --md-sys-color-background: #1f2223;
+  --md-sys-color-on-background: #f2f4f5;
+  --md-sys-color-surface: #1f2223;
+  --md-sys-color-surface-container-low: #262a2c;
+  --md-sys-color-surface-container: #2c3133;
+  --md-sys-color-surface-container-high: #353b3e;
+  --md-sys-color-on-surface: #eef1f2;
+  --md-sys-color-on-surface-variant: #b9c4cb;
+  --md-sys-color-primary: #8fb0c6;
+  --md-sys-color-on-primary: #0f2230;
+  --md-sys-color-secondary-container: #c9d5df;
+  --md-sys-color-on-secondary-container: #1b2832;
+  --md-sys-color-outline: #6f7d86;
+  --md-sys-color-outline-variant: #434b50;
+  --md-sys-color-scrim: rgba(0,0,0,.5);
+  --hero-pill-a: #c9d5df;
+  --hero-pill-b: #e9ecee;
+}
+[data-theme="light"] {
+  color-scheme: light;
+  --md-sys-color-background: #f6f8f9;
+  --md-sys-color-on-background: #1b1f21;
+  --md-sys-color-surface: #f6f8f9;
+  --md-sys-color-surface-container-low: #eef2f4;
+  --md-sys-color-surface-container: #e6ecef;
+  --md-sys-color-surface-container-high: #dde5e9;
+  --md-sys-color-on-surface: #1b1f21;
+  --md-sys-color-on-surface-variant: #4a565d;
+  --md-sys-color-primary: #3d6680;
+  --md-sys-color-on-primary: #ffffff;
+  --md-sys-color-secondary-container: #cfdde7;
+  --md-sys-color-on-secondary-container: #12212b;
+  --md-sys-color-outline: #72808a;
+  --md-sys-color-outline-variant: #c3ced5;
+  --hero-pill-a: #c9d5df;
+  --hero-pill-b: #dfe6ea;
+}
+:root {
+  --md-sys-shape-corner-small: 12px;
+  --md-sys-shape-corner-medium: 16px;
+  --md-sys-shape-corner-large: 28px;
+  --md-sys-shape-corner-extra-large: 40px;
+  --md-sys-typescale-display: 800 clamp(2.6rem, 8vw, 5.2rem)/0.98 "Inter Tight", "Inter", system-ui, sans-serif;
+  --md-sys-state-hover: .08;
+  --md-sys-state-pressed: .12;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: calc(72px + env(safe-area-inset-top, 0px)); }
+body {
+  margin: 0;
+  background: var(--md-sys-color-background);
+  color: var(--md-sys-color-on-background);
+  font: 400 1rem/1.55 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px) env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+:focus-visible { outline: 3px solid var(--md-sys-color-primary); outline-offset: 3px; border-radius: 8px; }
+
+/* ---------- Top app bar ---------- */
+.app-bar {
+  position: sticky; top: 0; z-index: 10;
+  display: flex; align-items: center; gap: 12px;
+  height: 64px; padding: 0 16px 0 20px;
+  background: color-mix(in srgb, var(--md-sys-color-surface) 88%, transparent);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--md-sys-color-outline-variant);
+}
+.app-bar .title { font: 600 1.05rem/1 "Inter Tight", "Inter", sans-serif; flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.icon-btn {
+  position: relative; width: 48px; height: 48px; border-radius: 50%;
+  border: 0; background: transparent; color: var(--md-sys-color-on-surface-variant);
+  display: grid; place-items: center; cursor: pointer;
+}
+.icon-btn svg { width: 24px; height: 24px; fill: currentColor; }
+.state::after, .icon-btn::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit;
+  background: currentColor; opacity: 0; transition: opacity .15s; pointer-events: none;
+}
+.state:hover::after, .icon-btn:hover::after { opacity: var(--md-sys-state-hover); }
+.state:active::after, .icon-btn:active::after { opacity: var(--md-sys-state-pressed); }
+
+/* ---------- Hero ---------- */
+.hero { position: relative; overflow: hidden; padding: clamp(40px, 8vw, 96px) 20px clamp(32px, 6vw, 64px); }
+.hero-inner { max-width: 1040px; margin: 0 auto; position: relative; z-index: 1; }
+.pill { position: absolute; border-radius: 999px; z-index: 0; will-change: transform; }
+.pill.a { width: 360px; height: 150px; right: -90px; top: -40px; background: var(--hero-pill-a); transform: rotate(-32deg); opacity: .9; }
+.pill.b { width: 190px; height: 190px; right: 12%; bottom: -80px; background: var(--hero-pill-b); opacity: .85; }
+.tag {
+  display: inline-flex; align-items: center; height: 32px; padding: 0 14px; border-radius: 16px;
+  background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container);
+  font: 600 .875rem/1 "Inter", sans-serif;
+}
+h1 { font: var(--md-sys-typescale-display); letter-spacing: -.025em; margin: 18px 0 14px; max-width: 12ch; }
+.sub { font: 700 clamp(1.15rem, 3vw, 1.6rem)/1.25 "Inter Tight", "Inter", sans-serif; color: var(--md-sys-color-primary); margin: 0 0 22px; }
+.meta { color: var(--md-sys-color-on-surface-variant); margin: 0; max-width: 56ch; }
+
+/* ---------- Layout ---------- */
+main { max-width: 1040px; margin: 0 auto; padding: 8px 20px 72px; }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0 32px; }
+.chip {
+  position: relative; height: 40px; padding: 0 16px; border-radius: var(--md-sys-shape-corner-small);
+  border: 1px solid var(--md-sys-color-outline); background: transparent;
+  color: var(--md-sys-color-on-surface-variant); font: 500 .9rem/1 "Inter", sans-serif; cursor: pointer;
+  display: inline-flex; align-items: center; gap: 8px;
+}
+.chip[aria-pressed="true"] { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); border-color: transparent; }
+.chip[aria-pressed="true"]::before { content: "✓"; font-weight: 700; }
+
+.group { margin: 0 0 44px; }
+.group[hidden] { display: none; }
+.group-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 14px; margin: 0 0 6px; }
+.group h2 { font: 800 clamp(1.5rem, 4vw, 2.1rem)/1.1 "Inter Tight", "Inter", sans-serif; letter-spacing: -.015em; margin: 0; }
+.slides { color: var(--md-sys-color-primary); font-weight: 600; font-size: .95rem; }
+.group-lead { margin: 0 0 18px; color: var(--md-sys-color-on-surface-variant); max-width: 62ch; }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 310px), 1fr)); gap: 14px; }
+.card {
+  position: relative; display: flex; flex-direction: column; gap: 10px;
+  background: var(--md-sys-color-surface-container-low);
+  border: 1px solid var(--md-sys-color-outline-variant);
+  border-radius: var(--md-sys-shape-corner-large);
+  padding: 20px 20px 16px;
+}
+.card:nth-child(even) { border-radius: var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-large) var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-large); }
+.card h3 { font: 700 1.1rem/1.25 "Inter Tight", "Inter", sans-serif; margin: 0; }
+.card p { margin: 0; color: var(--md-sys-color-on-surface-variant); font-size: .95rem; }
+.host { font-size: .82rem; color: var(--md-sys-color-outline); word-break: break-all; margin-top: auto; padding-top: 4px; }
+.card-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-top: 4px; }
+.btn {
+  position: relative; display: inline-flex; align-items: center; gap: 8px; height: 40px; padding: 0 20px;
+  border-radius: 20px; border: 0; cursor: pointer; text-decoration: none;
+  font: 600 .9rem/1 "Inter", sans-serif;
+  background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary);
+}
+.btn.tonal { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.btn.text { background: transparent; color: var(--md-sys-color-primary); padding: 0 12px; }
+.btn svg { width: 18px; height: 18px; fill: currentColor; }
+.note {
+  display: flex; gap: 10px; align-items: flex-start; margin-top: 2px;
+  font-size: .85rem; color: var(--md-sys-color-on-surface-variant);
+  background: var(--md-sys-color-surface-container); border-radius: var(--md-sys-shape-corner-small); padding: 10px 12px;
+}
+
+footer { border-top: 1px solid var(--md-sys-color-outline-variant); padding: 28px 20px calc(36px + env(safe-area-inset-bottom, 0px)); color: var(--md-sys-color-on-surface-variant); }
+footer .inner { max-width: 1040px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px 32px; justify-content: space-between; }
+footer p { margin: 0; font-size: .9rem; }
+
+/* snackbar */
+.snackbar {
+  position: fixed; left: 50%; bottom: calc(20px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 24px);
+  background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container);
+  padding: 14px 20px; border-radius: var(--md-sys-shape-corner-small); font-weight: 500; font-size: .92rem;
+  opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s; z-index: 20;
+}
+.snackbar.show { opacity: 1; transform: translate(-50%, 0); }
+
+
+/* ---------- M3 Expressive motion: springs, shape morphing, wavy progress ---------- */
+:root {
+  --ease-spatial: cubic-bezier(.22, 1, .36, 1);
+  --ease-effects: cubic-bezier(.3, 0, .2, 1);
+}
+body { transition: background-color .4s var(--ease-effects), color .4s var(--ease-effects); }
+
+/* wavy scroll progress under the app bar */
+.wave {
+  position: absolute; left: 0; bottom: -5px; height: 8px; width: 100%; pointer-events: none; clip-path: inset(0 100% 0 0); will-change: clip-path;
+  background: var(--md-sys-color-primary);
+  -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4Q6 -0.5 12 4T24 4' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x 0 0 / 24px 8px;
+          mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='8' viewBox='0 0 24 8'%3E%3Cpath d='M0 4Q6 -0.5 12 4T24 4' fill='none' stroke='%23000' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E") repeat-x 0 0 / 24px 8px;
+  animation: wave-move 1.4s linear infinite;
+}
+@keyframes wave-move { to { -webkit-mask-position: 24px 0; mask-position: 24px 0; } }
+
+/* hero: one orchestrated entrance, then the shapes keep slowly morphing */
+@keyframes pop { from { opacity: 0; transform: translate3d(0, 18px, 0) scale(.97); } to { opacity: 1; transform: none; } }
+.hero-inner > * { animation: pop 1.1s var(--ease-spatial) both; }
+.hero-inner > :nth-child(2) { animation-delay: .08s; }
+.hero-inner > :nth-child(3) { animation-delay: .16s; }
+.hero-inner > :nth-child(4) { animation-delay: .24s; }
+@keyframes pill-in-a { from { opacity: 0; transform: translate3d(80px, -50px, 0) rotate(-60deg) scale(.7); } to { opacity: .9; transform: rotate(-32deg); } }
+@keyframes drift-a { 0%, 100% { transform: rotate(-32deg); } 50% { transform: translate3d(-10px, 8px, 0) rotate(-28deg); } }
+@keyframes pill-in-b { from { opacity: 0; transform: scale(.4); } to { opacity: .85; transform: none; } }
+@keyframes morph-b {
+  0%, 100% { border-radius: 999px; transform: rotate(0); }
+  33% { border-radius: 44% 56% 52% 48% / 50% 44% 56% 50%; transform: rotate(24deg) translate3d(0, -6px, 0); }
+  66% { border-radius: 36%; transform: rotate(-12deg); }
+}
+.pill.a { animation: pill-in-a 1.4s var(--ease-spatial) both, drift-a 16s ease-in-out 1.5s infinite; }
+.pill.b { animation: pill-in-b 1.3s .2s var(--ease-spatial) both, morph-b 24s ease-in-out 1.6s infinite; }
+
+/* scroll reveal: soft spring, plays once per element */
+.js .reveal:not(.in) { opacity: 0; }
+.js .reveal.in { animation: pop .85s var(--ease-spatial) backwards; animation-delay: calc(var(--i, 0) * 55ms); }
+
+/* cards morph their shape on hover */
+.card {
+  transition: border-radius .5s var(--ease-spatial), transform .5s var(--ease-spatial),
+              background-color .3s var(--ease-effects), border-color .3s var(--ease-effects);
+}
+.card:hover {
+  transform: translate3d(0, -3px, 0);
+  border-radius: var(--md-sys-shape-corner-extra-large) var(--md-sys-shape-corner-medium);
+  background: var(--md-sys-color-surface-container);
+  border-color: var(--md-sys-color-primary);
+}
+.card:nth-child(even):hover { border-radius: var(--md-sys-shape-corner-medium) var(--md-sys-shape-corner-extra-large); }
+
+/* buttons, chips: calm state changes, ripple on press */
+:root { --ease-flow: cubic-bezier(.4, 0, .2, 1); }
+.btn, .chip, .icon-btn { overflow: hidden; -webkit-tap-highlight-color: transparent; }
+.btn, .chip {
+  transition: background-color .6s var(--ease-flow), color .6s var(--ease-flow), border-color .6s var(--ease-flow),
+              border-radius .7s var(--ease-flow), transform .5s var(--ease-flow);
+}
+.state::after, .icon-btn::after { transition: opacity .25s var(--ease-flow); }
+.btn:active { transform: scale(.99); }
+.btn.text.done { background: var(--md-sys-color-secondary-container); color: var(--md-sys-color-on-secondary-container); }
+.chip { gap: 0; }
+.chip[aria-pressed="true"], .chip[aria-pressed="true"]:hover { border-radius: 20px; }
+.chip::before {
+  content: "✓"; display: inline-block; font-weight: 700; overflow: hidden;
+  max-width: 0; margin-right: 0; opacity: 0; transform: scale(.4);
+  transition: max-width .7s var(--ease-flow), margin .7s var(--ease-flow), opacity .5s var(--ease-flow), transform .7s var(--ease-flow);
+}
+.chip[aria-pressed="true"]::before { max-width: 1.2em; margin-right: 8px; opacity: 1; transform: none; }
+
+/* card buttons fade in after the card */
+@keyframes btn-in { from { opacity: 0; transform: translate3d(0, 10px, 0); } to { opacity: 1; transform: none; } }
+.js .card.reveal:not(.in) .btn { opacity: 0; }
+.js .card.reveal.in .btn { animation: btn-in 1.5s var(--ease-flow) backwards; }
+.js .card.reveal.in .btn:nth-child(1) { animation-delay: calc(var(--i, 0) * 55ms + .5s); }
+.js .card.reveal.in .btn:nth-child(2) { animation-delay: calc(var(--i, 0) * 55ms + .75s); }
+
+/* skip link */
+.skip { position: absolute; left: 12px; top: -64px; z-index: 30; padding: 10px 16px; border-radius: 12px; font-weight: 600;
+  background: var(--md-sys-color-primary); color: var(--md-sys-color-on-primary); transition: top .2s var(--ease-effects); }
+.skip:focus { top: calc(8px + env(safe-area-inset-top, 0px)); }
+
+.ripple {
+  position: absolute; border-radius: 50%; background: currentColor; opacity: .22; pointer-events: none;
+  transform: scale(0); animation: ripple .9s var(--ease-effects) forwards;
+}
+@keyframes ripple { to { transform: scale(1); opacity: 0; } }
+
+/* theme toggle spins in with a spring */
+.icon-btn.spin svg { animation: spin 1s var(--ease-spatial); }
+@keyframes spin { from { transform: rotate(-140deg) scale(.6); } to { transform: none; } }
+
+/* snackbar bounces up */
+.snackbar { transition: opacity .25s var(--ease-effects), transform .5s var(--ease-spatial); transform: translate(-50%, 24px) scale(.96); }
+.snackbar.show { transform: translate(-50%, 0) scale(1); }
+
+@media (max-width: 600px) {
+  .pill.a { width: 240px; height: 100px; right: -80px; }
+  .pill.b { width: 120px; height: 120px; right: 4%; bottom: -50px; }
+  .app-bar .title { font-size: .95rem; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { transition: none !important; animation: none !important; }
+  .js .reveal:not(.in), .js .card.reveal:not(.in) .btn { opacity: 1; }
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#groups">Preskočiť na zdroje</a>
+
+<header class="app-bar">
+  <span class="title">Manažment dažďovej vody v mestách</span>
+  <button class="icon-btn" id="themeBtn" aria-label="Prepnúť svetlý a tmavý režim" title="Svetlý / tmavý režim">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.39 5.39 0 0 1-4.4 2.26 5.4 5.4 0 0 1-5.4-5.4c0-1.81.89-3.42 2.26-4.4A9.1 9.1 0 0 0 12 3z"/></svg>
+  </button>
+  <div class="wave" id="wave" aria-hidden="true"></div>
+</header>
+
+<section class="hero">
+  <span class="pill a" aria-hidden="true"></span>
+  <span class="pill b" aria-hidden="true"></span>
+  <div class="hero-inner">
+    <span class="tag">Zdroje</span>
+    <h1>Zoznam použitých zdrojov</h1>
+    <p class="sub">Sponge Cities a zelené strechy</p>
+    <p class="meta">Prezentácia pre predmet Environmentalistika, TUKE. Mikhailo Shovkoplias, Pavlo Franko, Yehor Kostiuchok, skupina 1PSAb1. Zdroje sú zoradené podľa tém a slajdov, na ktoré sa viažu.</p>
+  </div>
+</section>
+
+<main>
+  <div class="filters" role="group" aria-label="Filtrovať zdroje podľa témy" id="filters"></div>
+  <div id="groups"></div>
+  <noscript><p>Na zobrazenie zoznamu zdrojov zapnite JavaScript.</p></noscript>
+</main>
+
+<footer>
+  <div class="inner">
+    <p>Environmentalistika · Technická univerzita v Košiciach · 2026/2027</p>
+    <p>Odkazy vedú na externé stránky. Niektoré sú v angličtine alebo v češtine.</p>
+  </div>
+</footer>
+
+<div class="snackbar" id="snackbar" role="status" aria-live="polite"></div>
+
+<script>
+document.documentElement.classList.add('js');
+const GROUPS = [
+  {
+    id: "problem", title: "Problém nepriepustných miest", slides: "slajdy 2 a 3",
+    lead: "Prečo tradičné odvodnenie pri silných dažďoch nestačí a ako nepriepustné povrchy zvyšujú odtok.",
+    items: [
+      { t: "Prepady zo zmiešanej kanalizácie v EÚ", d: "Správa pre EÚ o tom, že pri silných dažďoch môže byť kapacita zmiešanej kanalizácie prekročená.", u: "https://circabc.europa.eu/sd/a/f3c0cbde-3f4a-4b6f-8953-0eaec6a6ffd0/Task%203%20Occurrence%20of%20storm%20water%20over%20flows%20in%20the%20EU.pdf", s: "circabc.europa.eu", k: "PDF · EN" },
+      { t: "Ako nepriepustné povrchy zhoršujú odtok", d: "Populárne vysvetlenie, ako spevnené plochy zvyšujú odtok a preťažujú kanalizáciu. Dáta sú z USA, od neziskovej organizácie.", u: "https://frontiergroup.org/?p=4953", s: "frontiergroup.org", k: "Článok · EN" }
+    ]
+  },
+  {
+    id: "sponge", title: "Sponge City v Číne", slides: "slajdy 4 a 8",
+    lead: "Pôvod konceptu, pilotné mestá Wu-chan a Šen-čen a nástroje modro-zelenej infraštruktúry.",
+    items: [
+      { t: "Wuhan Sponge City Programme", d: "V roku 2015 bolo vybraných 16 pilotných miest, medzi nimi aj Wu-chan.", u: "https://oppla.eu/wuhan-sponge-city-programme-achieving-harmony-among-people-water-and-city", s: "oppla.eu", k: "Prípadová štúdia · EN" },
+      { t: "GrowGreen: Wuhan", d: "Ten istý projekt IUCN a GrowGreen, so stiahnuteľnou správou.", u: "https://growgreenproject.eu/?p=2482", s: "growgreenproject.eu", k: "Projekt · EN" },
+      { t: "Sponge Cities: Panda Habitat (Lincoln Institute)", d: "Šen-čen, biopriekopy, priepustné povrchy a dažďové záhrady.", u: "https://www.lincolninst.edu/app/uploads/2024/04/sponge-cities-panda-habitat-lla171005.pdf", s: "lincolninst.edu", k: "PDF · EN" },
+      { t: "Sponge cities (Earth.org)", d: "Prvých 16 pilotných miest začalo v roku 2015, ďalších 14 v roku 2016. Šen-čen patrí do druhej vlny.", u: "https://earth.org/?p=17695", s: "earth.org", k: "Článok · EN" }
+    ]
+  },
+  {
+    id: "kodan", title: "Kodaň", slides: "slajd 8",
+    lead: "Plán pre prívalové dažde (Cloudburst Management Plan) po povodni v roku 2011.",
+    items: [
+      { t: "Cloudburst Management Plan 2012", d: "Plán mesta z roku 2012. Dňa 2. júla 2011 spadlo približne 100 mm za hodinu.", u: "https://climate-adapt.eea.europa.eu/de/metadata/case-studies/the-economics-of-managing-heavy-rains-and-stormwater-in-copenhagen-2013-the-cloudburst-management-plan/cloudburst_management_plan_2012.pdf", s: "climate-adapt.eea.europa.eu", k: "PDF · EN" },
+      { t: "C40: Copenhagen Cloudburst Management Plan", d: "Prípadová štúdia C40. Škody po daždi v roku 2011 sa odhadujú na približne 1 miliardu eur.", u: "https://www.c40.org/case-studies/c40-good-practice-guides-copenhagen-cloudburst-management-plan", s: "c40.org", k: "Prípadová štúdia · EN" },
+      { t: "NPR: Copenhagen a záplavy", d: "Aktuálny článok o tom, ako plán funguje dnes.", u: "https://www.npr.org/2025/06/13/nx-s1-5340710/copenhagen-climate-change-solutions-flooding", s: "npr.org", k: "Článok · EN" }
+    ]
+  },
+  {
+    id: "berlin-viedan", title: "Berlín a Viedeň", slides: "slajd 8",
+    lead: "Podpora zelených striech: dotácie vo Viedni od roku 2003 a berlínsky program GründachPLUS.",
+    items: [
+      { t: "Green roofs in Vienna, Austria", d: "Viedeň financuje zelené strechy od roku 2003, podpora je 8 až 25 € za m². Prínosom je aj úspora energie a dlhšia životnosť oproti bežnej plochej streche.", u: "https://eplanete.oieau.fr/case-study/green-roofs-vienna-austria", s: "eplanete.oieau.fr", k: "Prípadová štúdia · EN" },
+      { t: "NWRM: Vienna green roofs (PDF)", d: "Rovnaký prípad z Viedne vo formáte PDF.", u: "https://www.nwrm.eu/sites/default/files/case_studies_ressources/cs-at-2-final_version.pdf", s: "nwrm.eu", k: "PDF · EN" },
+      { t: "EGU23-13499: GründachPLUS Berlín", d: "Berlínsky program GründachPLUS vyčlenil od roku 2019 sumu 2,7 milióna eur.", u: "https://meetingorganizer.copernicus.org/EGU23/EGU23-13499.html", s: "meetingorganizer.copernicus.org", k: "Abstrakt · EN" }
+    ]
+  },
+  {
+    id: "bratislava", title: "Bratislava", slides: "slajd 8",
+    lead: "Zelená strecha na zariadení pre seniorov a granty na dažďové záhrady a nádrže.",
+    items: [
+      { t: "EEA Grants: adaptácia na zmenu klímy v Bratislave", d: "Mesto zriadilo zelenú strechu s rozlohou 1000 m² na dome pre seniorov. Granty pokrývajú až 50 % nákladov na malé projekty udržateľného odvodnenia, maximálne 1000 € na projekt.", u: "https://climate-adapt.eea.europa.eu/cs/metadata/case-studies/eea-grants-supporting-the-city-of-bratislava-to-implement-climate-adaptation-measures", s: "climate-adapt.eea.europa.eu", k: "Prípadová štúdia · CS", n: "Stránka je v češtine (strojový preklad). Jazyk sa dá prepnúť v menu vpravo." }
+    ]
+  },
+  {
+    id: "strechy", title: "Zelené strechy: prínosy a limity", slides: "slajdy 7 a 9",
+    lead: "Zadržanie vody, chladenie budov a rozdiely vo výsledkoch podľa podmienok.",
+    items: [
+      { t: "Green roofs: Performance (STEP)", d: "Extenzívne zelené strechy zadržia ročne približne 50 % zrážok.", u: "https://wiki.sustainabletechnologies.ca/wiki/Green_roofs:_Performance", s: "wiki.sustainabletechnologies.ca", k: "Wiki · EN" },
+      { t: "Prehľad štúdií o zelených strechách (Sustainability, MDPI)", d: "Prehľad výskumov. Výsledky zadržania vody sa líšia podľa podmienok.", u: "https://mdpi.com/2071-1050/13/23/13231", s: "mdpi.com", k: "Odborný článok · EN" },
+      { t: "Viedeň: zelené strechy", d: "Úspora energie a dlhšia životnosť oproti bežnej plochej streche.", u: "https://eplanete.oieau.fr/case-study/green-roofs-vienna-austria", s: "eplanete.oieau.fr", k: "Prípadová štúdia · EN" },
+      { t: "Bratislava: meranie teploty striech", d: "Povrch zelených striech bol podľa merania z roku 2017 až o 19 °C chladnejší ako štandardná strecha.", u: "https://climate-adapt.eea.europa.eu/cs/metadata/case-studies/eea-grants-supporting-the-city-of-bratislava-to-implement-climate-adaptation-measures", s: "climate-adapt.eea.europa.eu", k: "Prípadová štúdia · CS" }
+    ]
+  }
+];
+
+const ICON_OPEN = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14c1.1 0 2-.9 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>';
+const ICON_COPY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 1H4a2 2 0 0 0-2 2v14h2V3h12V1zm3 4H8a2 2 0 0 0-2 2v14c0 1.1.9 2 2 2h11a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2zm0 16H8V7h11v14z"/></svg>';
+
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+const filters = document.getElementById('filters');
+const groupsEl = document.getElementById('groups');
+
+// filter chips
+const all = document.createElement('button');
+all.className = 'chip state'; all.textContent = 'Všetko'; all.setAttribute('aria-pressed', 'true'); all.dataset.id = 'all';
+filters.appendChild(all);
+GROUPS.forEach(g => {
+  const b = document.createElement('button');
+  b.className = 'chip state'; b.textContent = g.title.split(':')[0]; b.setAttribute('aria-pressed', 'false'); b.dataset.id = g.id;
+  filters.appendChild(b);
+});
+
+// groups
+groupsEl.innerHTML = GROUPS.map(g => `
+  <section class="group" id="${g.id}" data-group="${g.id}" aria-labelledby="h-${g.id}">
+    <div class="group-head reveal" style="--i:0"><h2 id="h-${g.id}">${esc(g.title)}</h2><span class="slides">${esc(g.slides)}</span></div>
+    <p class="group-lead reveal" style="--i:1">${esc(g.lead)}</p>
+    <div class="cards">
+      ${g.items.map((i, n) => `
+        <article class="card reveal" style="--i:${Math.min(n, 5) + 2}">
+          <span class="tag" style="align-self:flex-start;height:28px;font-size:.78rem;padding:0 12px">${esc(i.k)}</span>
+          <h3>${esc(i.t)}</h3>
+          <p>${esc(i.d)}</p>
+          ${i.n ? `<div class="note">${esc(i.n)}</div>` : ''}
+          <span class="host">${esc(i.s)}</span>
+          <div class="card-actions">
+            <a class="btn state" href="${esc(i.u)}" target="_blank" rel="noopener noreferrer">${ICON_OPEN}Otvoriť zdroj</a>
+            <button class="btn text state" data-copy="${esc(i.u)}" aria-label="Kopírovať odkaz: ${esc(i.t)}">${ICON_COPY}Kopírovať</button>
+          </div>
+        </article>`).join('')}
+    </div>
+  </section>`).join('');
+
+// scroll reveal (springs), re-played when the filter changes
+const revealEls = [...document.querySelectorAll('.reveal')];
+const io = 'IntersectionObserver' in window
+  ? new IntersectionObserver(entries => entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }), { threshold: .08, rootMargin: '0px 0px -6% 0px' })
+  : null;
+function watch(list) { list.forEach(el => io ? io.observe(el) : el.classList.add('in')); }
+function replay() {
+  const visible = revealEls.filter(el => !el.closest('.group').hidden);
+  visible.forEach(el => { el.classList.remove('in'); io && io.unobserve(el); });
+  requestAnimationFrame(() => requestAnimationFrame(() => watch(visible)));
+}
+watch(revealEls);
+
+// wavy scroll progress
+const wave = document.getElementById('wave');
+let wTarget = 0, wCur = 0, wRaf = 0;
+function wStep() {
+  wCur += (wTarget - wCur) * 0.14;
+  if (Math.abs(wTarget - wCur) < 0.0005) wCur = wTarget;
+  wave.style.clipPath = `inset(0 ${(1 - wCur) * 100}% 0 0)`;
+  wRaf = wCur === wTarget ? 0 : requestAnimationFrame(wStep);
+}
+function prog() {
+  const h = document.documentElement.scrollHeight - innerHeight;
+  wTarget = h > 0 ? Math.min(Math.max(scrollY / h, 0), 1) : 0;
+  if (!wRaf) wRaf = requestAnimationFrame(wStep);
+}
+addEventListener('scroll', prog, { passive: true }); addEventListener('resize', prog); prog();
+
+// ripple from the pointer position
+document.addEventListener('pointerdown', e => {
+  const host = e.target.closest('.btn, .chip, .icon-btn'); if (!host) return;
+  const r = host.getBoundingClientRect(), size = Math.max(r.width, r.height) * 2.4;
+  const d = document.createElement('span'); d.className = 'ripple';
+  d.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - r.left - size / 2}px;top:${e.clientY - r.top - size / 2}px`;
+  host.appendChild(d); d.addEventListener('animationend', () => d.remove());
+});
+
+// filtering
+filters.addEventListener('click', e => {
+  const b = e.target.closest('.chip'); if (!b) return;
+  const id = b.dataset.id;
+  filters.querySelectorAll('.chip').forEach(c => c.setAttribute('aria-pressed', String(c === b)));
+  document.querySelectorAll('.group').forEach(g => { g.hidden = id !== 'all' && g.dataset.group !== id; });
+  replay(); prog();
+});
+
+// copy + snackbar
+const bar = document.getElementById('snackbar');
+let t;
+function toast(msg) { bar.textContent = msg; bar.classList.add('show'); clearTimeout(t); t = setTimeout(() => bar.classList.remove('show'), 2200); }
+document.addEventListener('click', async e => {
+  const b = e.target.closest('[data-copy]'); if (!b) return;
+  try {
+    await navigator.clipboard.writeText(b.dataset.copy); toast('Odkaz skopírovaný');
+    if (!b.classList.contains('done')) {
+      const keep = b.innerHTML; b.classList.add('done');
+      b.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 16.2 4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4z"/></svg>Skopírované';
+      setTimeout(() => { b.innerHTML = keep; b.classList.remove('done'); }, 1600);
+    }
+  } catch { toast('Kopírovanie sa nepodarilo, označte odkaz ručne'); }
+});
+
+// theme
+const root = document.documentElement;
+try { const saved = localStorage.getItem('theme'); if (saved) root.dataset.theme = saved; } catch (e) {}
+document.getElementById('themeBtn').addEventListener('click', () => {
+  const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+  root.dataset.theme = next;
+  document.querySelector('meta[name="theme-color"]').content = next === 'dark' ? '#1f2223' : '#f6f8f9';
+  try { localStorage.setItem('theme', next); } catch (e) {}
+  const tb = document.getElementById('themeBtn'); tb.classList.remove('spin'); void tb.offsetWidth; tb.classList.add('spin');
+});
+</script>
+</body>
+</html>
